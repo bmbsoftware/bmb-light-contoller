@@ -1,0 +1,16 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #4d4d4d;
+  color: #FFFFFF;
+  font-family: 'Open Sans', sans-serif
+}
+
+a {
+  text-decoration: none;
+  color: #e7dc79;
+}
+
+h1 {
+  font-weight: bold;
+}
