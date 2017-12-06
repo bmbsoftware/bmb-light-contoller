@@ -1,18 +1,20 @@
 import { combineReducers } from 'redux';
 import _ from 'lodash';
-import { Action } from './applicationTypes';
+import { ApiResultAction } from './applicationTypes';
+import { default as lightsReducer } from 'domains/lights/reducer';
 
 export const initialState = {
-	lights: { }
+	lights: {}
 };
 
-const entities = (state = initialState, action: Action) => {
-	if (action.payload && action.payload.entities) {
-		return _.mergeWith({}, state, action.payload.entities);
+const entities = (state = initialState, action: ApiResultAction) => {
+	if (action.result && action.result.entities) {
+		return _.mergeWith({}, state, action.result.entities);
 	}
-	return initialState;
+	return state;
 };
 
 export default combineReducers({
-	entities
+	entities,
+	...lightsReducer
 });

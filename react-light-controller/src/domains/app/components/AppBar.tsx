@@ -34,27 +34,28 @@ const styles = (theme: any) => ({
 class ButtonAppBar extends React.Component<Props, State> {
 	constructor(props: Props) {
 		super(props);
+		const currentLocation = this.getLocation(location);
 		this.state = {
-			current: Locations.home
+			current: currentLocation
 		};
 	}
 
 	public componentWillReceiveProps(nextProps: Props) {
 		const { location } = nextProps;
 
-		let currentLocation = Locations.home;
-		if (location) {
-			switch (location.pathname) {
-				case '/lights':
-					currentLocation = Locations.lights;
-					break;
-				default:
-					currentLocation = Locations.home;
-			}
-		}
-		this.state = {
+		const currentLocation = this.getLocation(location);
+		this.setState({
 			current: currentLocation
-		};
+		});
+	}
+
+	private getLocation = (location: any) => {
+		switch (location.pathname) {
+			case '/lights':
+				return Locations.lights;
+			default:
+				return Locations.home;
+		}
 	}
 
 	private handleChange = (event: any, value: number) => {

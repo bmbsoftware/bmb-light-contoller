@@ -1,10 +1,12 @@
 export interface Action {
-	type: string;
-	payload: any;
+	type?: string;
+	payload?: any;
 }
 
-export interface ApiAction {
-	promise: (client: any) => any;
+export interface ApiAction extends Action {
+	promise?: (client: any) => any;
+}
+
+export interface ApiResultAction extends Action {
 	result?: any;
-	error?: any;
 }

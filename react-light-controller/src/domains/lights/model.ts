@@ -1,8 +1,9 @@
 export interface LightState {
 	on: boolean;
-	bri: number;
-	alert: string;
-	reachable: boolean;
+	bri?: number;
+	hue?: number;
+	alert?: string;
+	reachable?: boolean;
 }
 
 export interface SoftwareUpdate {

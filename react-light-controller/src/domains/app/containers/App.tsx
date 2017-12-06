@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import { purple } from 'material-ui/colors';
 
 import Home from './Home';
 import Lights from 'domains/lights/containers/Lights';
@@ -12,7 +13,8 @@ class App extends React.Component {
 	public render() {
 		const theme = createMuiTheme({
 			palette: {
-				type: 'dark'
+				type: 'dark',
+				primary: purple
 			}
 		});
 
