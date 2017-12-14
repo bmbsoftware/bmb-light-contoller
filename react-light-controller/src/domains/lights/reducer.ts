@@ -1,20 +1,12 @@
 import { Action } from '../../applicationTypes';
 import * as lightsActionTypes from './actionTypes';
 
-interface LightsContainer {
-	isLoaded: boolean;
-}
-
-interface LightsContainerState {
+export interface LightsDomainState {
 	loading: boolean;
-	lightsContainer: LightsContainer;
 }
 
-export const initialState: LightsContainerState = {
+export const initialState: LightsDomainState = {
 	loading: false,
-	lightsContainer: {
-		isLoaded: false
-	}
 };
 
 const reducer = (state = initialState, action: Action) => {
@@ -22,28 +14,19 @@ const reducer = (state = initialState, action: Action) => {
 		case lightsActionTypes.GET_ALL_LIGHTS:
 			return {
 				...state,
-				loading: true,
-				lightsContainer: {
-					isLoaded: false
-				}
+				loading: true
 			};
 
 		case lightsActionTypes.GET_ALL_LIGHTS_SUCCESS:
 			return {
 				...state,
-				loading: false,
-				lightsContainer: {
-					isLoaded: true
-				}
+				loading: false
 			};
 
 		case lightsActionTypes.GET_ALL_LIGHTS_FAIL:
 			return {
 				...state,
 				loading: false,
-				lightsContainer: {
-					isLoaded: false
-				}
 			};
 
 		default:

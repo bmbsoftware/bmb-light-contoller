@@ -1,9 +1,18 @@
-import { combineReducers } from 'redux';
-import _ from 'lodash';
+import { combineReducers, Reducer } from 'redux';
+import _, { Dictionary } from 'lodash';
 import { ApiResultAction } from './applicationTypes';
-import { default as lightsReducer } from 'domains/lights/reducer';
+import lightsReducer from 'domains/lights/reducer';
+import appReducer from 'domains/app/reducer';
+import { LightHubLocation, Light } from 'domains/lights/model';
+import { ApplicationState } from 'domains/app/model';
 
-export const initialState = {
+export interface EntityState {
+	lightHubLocation?: Dictionary<LightHubLocation>;
+	lights: Dictionary<Light>;
+}
+
+export const initialState: EntityState = {
+	lightHubLocation: {},
 	lights: {}
 };
 
@@ -14,7 +23,12 @@ const entities = (state = initialState, action: ApiResultAction) => {
 	return state;
 };
 
-export default combineReducers({
+const reducers: Reducer<ApplicationState> = combineReducers({
 	entities,
-	...lightsReducer
+	domains: combineReducers({
+		app: appReducer,
+		lights: lightsReducer
+	})
 });
+
+export default reducers;

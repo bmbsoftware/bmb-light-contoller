@@ -1,3 +1,8 @@
+export interface LightHubLocation {
+	id: string;
+	internalipaddress: string;
+}
+
 export interface LightState {
 	on: boolean;
 	bri?: number;

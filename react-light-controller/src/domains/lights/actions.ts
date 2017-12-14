@@ -1,4 +1,4 @@
-import { Action, ApiAction } from '../../applicationTypes';
+import { Action, ApiAction, ApiClient } from 'applicationTypes';
 import * as actionTypes from './actionTypes';
 import { LightState } from 'domains/lights/model';
 
@@ -18,26 +18,26 @@ export const doSetLightState = (id: number, state: LightState): Action => {
 	};
 };
 
-export const getAllLights = (): ApiAction => {
+export const getAllLights = (hubUrl: string): ApiAction => {
 	return {
-		promise: (apiClient: any) => {
-			return apiClient.get('/lights');
+		promise: (apiClient: ApiClient) => {
+			return apiClient.get(`http://${hubUrl}/api/${process.env.REACT_APP_API_USER}/lights`);
 		}
 	};
 };
 
-export const getLight = (id: number): ApiAction => {
+export const getLight = (hubUrl: string, id: number): ApiAction => {
 	return {
-		promise: (apiClient: any) => {
-			return apiClient.get(`/lights/${id}`);
+		promise: (apiClient: ApiClient) => {
+			return apiClient.get(`http://${hubUrl}/api/${process.env.REACT_APP_API_USER}/lights/${id}`);
 		}
 	};
 };
 
-export const setLightState = (id: number, state: LightState): ApiAction => {
+export const setLightState = (hubUrl: string, id: number, state: LightState): ApiAction => {
 	return {
-		promise: (apiClient: any) => {
-			return apiClient.put(`/lights/${id}/state`, { data: state });
+		promise: (apiClient: ApiClient) => {
+			return apiClient.put(`http://${hubUrl}/api/${process.env.REACT_APP_API_USER}/lights/${id}/state`, { data: state });
 		}
 	};
 };

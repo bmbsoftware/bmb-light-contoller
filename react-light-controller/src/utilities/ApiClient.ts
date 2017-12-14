@@ -1,33 +1,35 @@
 import superagent from 'superagent';
+import { ApiClient } from 'applicationTypes';
 
-const basePath = `http://10.0.1.151/api/${process.env.REACT_APP_API_USER}`;
+class ApiClientImpl implements ApiClient {
+	private performApiRequest(method: string, path: string, { params, data }: any = {}) {
+		return new Promise((resolve, reject) => {
+			// superagent uses 'del' instead of 'delete'
+			const saMethod = method === 'delete' ? 'del' : method;
 
-const methods = ['get', 'post', 'put', 'patch', 'delete'];
+			const request = superagent[saMethod](path);
 
-class ApiClient {
-	constructor() {
-		methods.forEach((method) =>
-			this[method] = (path: string, { params, data }: any = {}) => new Promise((resolve, reject) => {
-				// superagent uses 'del' instead of 'delete'
-				const saMethod = method === 'delete' ? 'del' : method;
+			if (params) {
+				request.query(params);
+			}
 
-				const request = superagent[saMethod](basePath + path);
+			if (data) {
+				request.send(data);
+			}
 
-				if (params) {
-					request.query(params);
+			request.end(
+				(err: any, { body }: any = {}) => {
+					err ? reject(body || err) : resolve(body);
 				}
+			);
 
-				if (data) {
-					request.send(data);
-				}
-
-				request.end(
-					(err: any, { body }: any = {}) => {
-						err ? reject(body || err) : resolve(body);
-					}
-				);
-			}));
+		});
 	}
-}
 
-export default ApiClient;
+	public get = (path: string, { params, data }: any = {}) => this.performApiRequest('get', path, { params, data });
+	public post = (path: string, { params, data }: any = {}) => this.performApiRequest('post', path, { params, data });
+	public put = (path: string, { params, data }: any = {}) => this.performApiRequest('put', path, { params, data });
+	public patch = (path: string, { params, data }: any = {}) => this.performApiRequest('patch', path, { params, data });
+	public delete = (path: string, { params, data }: any = {}) => this.performApiRequest('delete', path, { params, data });
+}
+export default ApiClientImpl;

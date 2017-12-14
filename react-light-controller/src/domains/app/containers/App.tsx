@@ -1,15 +1,29 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import { purple } from 'material-ui/colors';
 
-import Home from './Home';
+import { doLoadLightHubLocation } from 'domains/app/actions';
+
+import Home from 'domains/app/containers/Home';
 import Lights from 'domains/lights/containers/Lights';
 import AppBar from 'domains/app/components/AppBar';
 
 import 'domains/app/containers/App.css';
 
-class App extends React.Component {
+export interface Props {
+	doLoadLightHubLocation: typeof doLoadLightHubLocation;
+}
+
+export class App extends React.Component<Props, any> {
+	public componentWillMount() {
+		if (this.props.doLoadLightHubLocation) {
+			this.props.doLoadLightHubLocation();
+			setTimeout(() => this.props.doLoadLightHubLocation(), 600000);
+		}
+	}
+
 	public render() {
 		const theme = createMuiTheme({
 			palette: {
@@ -36,4 +50,7 @@ class App extends React.Component {
 	}
 }
 
-export default App;
+export default connect(
+	null,
+	{ doLoadLightHubLocation }
+)(App);

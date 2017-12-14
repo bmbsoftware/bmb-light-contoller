@@ -7,16 +7,14 @@ import LightPanel from 'domains/lights/components/LightPanel';
 import { doGetAllLights, doSetLightState } from 'domains/lights/actions';
 import * as lightSelectors from 'domains/lights/selectors';
 import { Light, LightState } from 'domains/lights/model';
+import { ApplicationState } from 'applicationTypes';
 
 interface Props {
+	loading: boolean;
 	lights: Light[] | null;
 	loadLights: typeof doGetAllLights;
 	setLightState: typeof doSetLightState;
 	classes: any;
-}
-
-interface State {
-	loading: boolean;
 }
 
 const styles = (theme: any) => {
@@ -42,7 +40,7 @@ const styles = (theme: any) => {
 	};
 };
 
-export class Lights extends React.Component<Props, State> {
+export class Lights extends React.Component<Props, any> {
 	public componentWillMount() {
 		const { loadLights } = this.props;
 		loadLights();
@@ -58,16 +56,19 @@ export class Lights extends React.Component<Props, State> {
 	}
 
 	public render() {
-		const { lights, classes } = this.props;
+		const { lights, classes, loading } = this.props;
 		return (
 			<div>
 				<div className={classes.lightContainer}>
 					{
-						lights && lights.map((light) => (
+						! loading && lights && lights.map((light) => (
 							<div key={light.id}>
 								<LightPanel onClick={this.toggleLight} className={classes.lightPanel} light={light} />
 							</div>
 						))
+					}
+					{
+						loading && <div>Loading...</div>
 					}
 				</div>
 			</div>
@@ -76,9 +77,10 @@ export class Lights extends React.Component<Props, State> {
 }
 
 const connector = connect(
-	(state) => {
+	(state: ApplicationState) => {
 		return {
-			lights: lightSelectors.getAllLights(state)
+			lights: lightSelectors.getAllLights(state),
+			loading: state.domains.lights.loading
 		};
 	},
 	{ 
