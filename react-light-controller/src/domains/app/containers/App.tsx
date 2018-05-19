@@ -16,7 +16,7 @@ export interface Props {
 	doLoadLightHubLocation: typeof doLoadLightHubLocation;
 }
 
-export class App extends React.Component<Props, any> {
+export class App extends React.Component<Props> {
 	public componentWillMount() {
 		if (this.props.doLoadLightHubLocation) {
 			this.props.doLoadLightHubLocation();
