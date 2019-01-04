@@ -1,5 +1,5 @@
-import * as actionTypes from 'domains/app/actionTypes';
 import { Action } from 'applicationTypes';
+import * as actionTypes from './actionTypes';
 
 export interface AppDomainState {
 	loading: boolean;

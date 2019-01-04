@@ -7,7 +7,7 @@ class ApiClientImpl implements ApiClient {
 			// superagent uses 'del' instead of 'delete'
 			const saMethod = method === 'delete' ? 'del' : method;
 
-			const request = superagent[saMethod](path);
+			const request = (superagent as any)[saMethod](path);
 
 			if (params) {
 				request.query(params);

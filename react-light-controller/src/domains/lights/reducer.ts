@@ -1,4 +1,4 @@
-import { Action } from '../../applicationTypes';
+import { Action } from 'applicationTypes';
 import * as lightsActionTypes from './actionTypes';
 
 export interface LightsDomainState {

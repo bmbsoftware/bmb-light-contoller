@@ -1,12 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router';
-import { withStyles } from 'material-ui/styles';
-import BottomNavigation from 'material-ui/BottomNavigation';
-import BottomNavigationButton from 'material-ui/BottomNavigation/BottomNavigationButton';
-import HomeIcon from 'material-ui-icons/Home';
-import LightbulbOutlineIcon from 'material-ui-icons/LightbulbOutline';
-import GroupIcon from 'material-ui-icons/Group';
-import AutomationIcon from 'material-ui-icons/Alarm';
+import { withStyles } from '@material-ui/core/styles';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import HomeIcon from '@material-ui/icons/Home';
+import LightbulbOutlineIcon from '@material-ui/icons/HighlightOutlined';
+import GroupIcon from '@material-ui/icons/Group';
+import AutomationIcon from '@material-ui/icons/Alarm';
 
 interface Props {
 	location?: any;
@@ -79,10 +79,10 @@ class ButtonAppBar extends React.Component<Props, State> {
 		return (
 			<div className={classes.root}>
 				<BottomNavigation showLabels value={current} onChange={this.handleChange}>
-					<BottomNavigationButton value={Locations.home} label="Home" icon={<HomeIcon />} />
-					<BottomNavigationButton value={Locations.lights} label="Lights" icon={<LightbulbOutlineIcon />} />
-					<BottomNavigationButton value={Locations.groups} label="Groups" icon={<GroupIcon />} />
-					<BottomNavigationButton value={Locations.automation} label="Automation" icon={<AutomationIcon />} />
+					<BottomNavigationAction value={Locations.home} label="Home" icon={<HomeIcon />} />
+					<BottomNavigationAction value={Locations.lights} label="Lights" icon={<LightbulbOutlineIcon />} />
+					<BottomNavigationAction value={Locations.groups} label="Groups" icon={<GroupIcon />} />
+					<BottomNavigationAction value={Locations.automation} label="Automation" icon={<AutomationIcon />} />
 				</BottomNavigation>
 			</div>
 		);

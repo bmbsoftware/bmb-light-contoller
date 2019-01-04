@@ -8,5 +8,5 @@ const props: Props = {
 
 it('renders without crashing', () => {
 	const wrapper = shallow(< App {...props} />);
-	expect(wrapper).toBeDefined();
+	expect(wrapper).toMatchSnapshot();
 });

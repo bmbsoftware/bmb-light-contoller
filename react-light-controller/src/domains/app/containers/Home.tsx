@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Button from 'material-ui/Button';
+import Button from '@material-ui/core/Button';
 import { LightHubLocation } from 'domains/lights/model';
 import { doLoadLightHubLocation } from 'domains/app/actions';
 
@@ -24,15 +24,15 @@ export class Home extends React.Component<Props, any> {
 					This app can be used to control lights in the <a href="#">Philips Hue Personal Wireless Lighting System</a>.
 				</p>
 				<Link to="/lights">
-					<Button raised color="primary">Get Started</Button>
+					<Button color="primary">Get Started</Button>
 				</Link>
 				<p>
 					{loading && <span>Loading...</span>}
-					{!loading && hub && <div>Light Hub ({hub.id}): {hub.internalipaddress}</div>}
-					{!loading && !hub && <div>No Light Hub Found!!</div>}
+					{!loading && hub && <span>Light Hub ({hub.id}): {hub.internalipaddress}</span>}
+					{!loading && !hub && <span>No Light Hub Found!!</span>}
 				</p>
 				<p>
-					<Button raised onClick={this.handleReload}>Find Light Hub</Button>
+					<Button onClick={this.handleReload}>Find Light Hub</Button>
 				</p>
 			</div>
 		);

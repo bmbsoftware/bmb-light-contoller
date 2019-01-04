@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withStyles } from 'material-ui/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 import LightPanel from 'domains/lights/components/LightPanel';
 
@@ -20,8 +20,8 @@ interface Props {
 const styles = (theme: any) => {
 	return {
 		lightContainer: {
-			textAlign: 'left',
-			display: 'flex',
+			textAlign: 'left' as 'left',
+			display: 'flex' as 'flex',
 			flexWrap: 'wrap' as 'wrap',
 			justifyContent: 'center' as 'center',
 			alignContent: 'space-around' as 'space-around'
@@ -32,7 +32,7 @@ const styles = (theme: any) => {
 			margin: '10px',
 			padding: '4px',
 			overflow: 'hidden' as 'hidden',
-			whiteSpace: 'nowrap',
+			whiteSpace: 'nowrap' as 'nowrap',
 			textOverflow: 'ellipsis',
 			display: 'flex',
 			alignContent: 'center' as 'center'

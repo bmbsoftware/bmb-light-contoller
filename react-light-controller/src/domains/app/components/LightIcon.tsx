@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles } from 'material-ui/styles';
-import LightBulbIcon from 'material-ui-icons/LightbulbOutline';
+import { withStyles } from '@material-ui/core/styles';
+import LightBulbIcon from '@material-ui/icons/HighlightOutlined';
 
 interface Props {
 	isLit: boolean;

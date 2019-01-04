@@ -1,6 +1,6 @@
 import { Action, ApiAction, ApiClient } from 'applicationTypes';
-import * as actionTypes from './actionTypes';
 import { LightState } from 'domains/lights/model';
+import * as actionTypes from './actionTypes';
 
 export const doGetAllLights = (): Action => {
 	return {

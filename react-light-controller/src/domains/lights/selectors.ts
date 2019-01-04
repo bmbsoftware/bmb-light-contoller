@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
-import { Light } from 'domains/lights/model';
+import { Light } from './model';
 
 const getLights = (state: any) => state.entities.lights;
 

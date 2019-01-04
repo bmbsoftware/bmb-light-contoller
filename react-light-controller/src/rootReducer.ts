@@ -1,10 +1,10 @@
 import { combineReducers, Reducer } from 'redux';
 import _, { Dictionary } from 'lodash';
-import { ApiResultAction } from './applicationTypes';
+import { ApiResultAction } from 'applicationTypes';
 import lightsReducer from 'domains/lights/reducer';
 import appReducer from 'domains/app/reducer';
 import { LightHubLocation, Light } from 'domains/lights/model';
-import { ApplicationState } from 'domains/app/model';
+import { ApplicationState } from './domains/app/model';
 
 export interface EntityState {
 	lightHubLocation?: Dictionary<LightHubLocation>;
@@ -23,7 +23,7 @@ const entities = (state = initialState, action: ApiResultAction) => {
 	return state;
 };
 
-const reducers: Reducer<ApplicationState> = combineReducers({
+const reducers: Reducer<any> = combineReducers({
 	entities,
 	domains: combineReducers({
 		app: appReducer,
